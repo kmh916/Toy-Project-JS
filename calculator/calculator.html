@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		body {
+			background-color: #1f1f1f;
+ 			display: flex;
+ 			justify-content: center;
+ 			align-items: center;
+ 			height: 100vh;
+		}
+		
+		.calculator{
+			 width:287px;
+			 border: 1px solid #333;
+			 background-color: #ccc;
+			 padding: 5px;
+		}
+		
+		.calculator div{
+			display: grid;
+			grid-template-columns:repeat(4,65px);
+			grid-auto-rows : 65px;
+			grid-gap : 5px;
+		}
+		
+ 		.calculator div input{ 
+ 			border: 2px solid #333;
+ 			cursor: pointer;
+ 			font-size: 20px;
+ 		} 
+		
+ 		.calculator div input:hover{ 
+ 			box-shadow: 1px 1px 2px #333; 
+ 		} 
+		
+ 		.calculator div .clear{ 
+ 			background-color: #ed4848;
+ 		}
+		
+ 		.calculator div .operator{
+ 			background-color: orange;
+ 		}
+		
+ 		.calculator .dot{
+ 			background-color: 	green; 
+ 		}
+		
+ 		.calculator div input[type='text']{
+ 			grid-column : span 4;
+ 			text-align: right;
+ 		}
+		
+ 		.calculator div .clear{
+ 			grid-column : span 3;
+ 		}
+		
+ 		.calculator div .result{
+ 			grid-column : span 2;
+ 		}
+	</style>
+</head>
+<body>
+	<div class="calculator">
+		<div>
+			<input type="text" id ="result">
+			<input type="button" class="clear" value="C" onclick="clear_val()">
+			<input type="button" class="operator" value="/" onclick="sym_click(this.value)">
+			<input type="button" value="1" onclick = "num_click(this.value)">
+			<input type="button" value="2" onclick = "num_click(this.value)">
+			<input type="button" value="3" onclick = "num_click(this.value)">
+			<input type="button" class="operator" value="*" onclick="sym_click(this.value)">
+			<input type="button" value="4" onclick = "num_click(this.value)">
+			<input type="button" value="5" onclick = "num_click(this.value)">
+			<input type="button" value="6" onclick = "num_click(this.value)">
+			<input type="button" class="operator" value="+" onclick="sym_click(this.value)">
+			<input type="button" value="7" onclick = "num_click(this.value)">
+			<input type="button" value="8" onclick = "num_click(this.value)">
+			<input type="button" value="9" onclick = "num_click(this.value)">
+			<input type="button" class="operator" value="-" onclick="sym_click(this.value)">
+			<input type="button" class="dot" value="." onclick = "num_click(this.value)">
+			<input type="button" value="0" onclick = "num_click(this.value)">
+			<input type="button" class="operator result" value="=" onclick="calc()">
+		</div>
+	</div>
+	
+	<script>
+		// script를 작성해주세요	
+		let temp='';
+		let symbols='';
+		function num_click(num){
+			document.getElementById("result").value += num;
+		}
+		
+		function clear_val() {
+            document.getElementById("result").value = "";
+            temp = '';
+            symbols = '';
+        }
+		
+		function sym_click(symbol){
+				
+			temp = document.getElementById("result").value;
+			document.getElementById("result").value = '';
+			symbols = symbol;
+		}
+		
+		function calc(){
+			switch(symbols){
+			case '+' : 
+			document.getElementById("result").value = 
+			Number(temp)+Number(document.getElementById("result").value);
+			break;
+			case '-' :
+			document.getElementById("result").value = 
+			Number(temp)-Number(document.getElementById("result").value);
+			break;
+			case '/' :
+			if(document.getElementById("result").value!=0)
+			document.getElementById("result").value = 
+			Number(temp)/Number(document.getElementById("result").value);
+			else alert('0으로 나눌수 없습니다.');
+			break;
+			case '*' :
+			document.getElementById("result").value = 
+			Number(temp)*Number(document.getElementById("result").value);
+			break;
+			}
+		}
+	</script>
+</body>
+</html>
